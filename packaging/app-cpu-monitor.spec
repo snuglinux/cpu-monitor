@@ -33,10 +33,13 @@ rm -rf %{buildroot}
 
 install -d %{buildroot}%{app_root}
 
-cp -a source/controllers %{buildroot}%{app_root}/
-cp -a source/deploy %{buildroot}%{app_root}/
-cp -a source/language %{buildroot}%{app_root}/
-cp -a source/views %{buildroot}%{app_root}/
+cp -a controllers %{buildroot}%{app_root}/
+cp -a deploy %{buildroot}%{app_root}/
+cp -a language %{buildroot}%{app_root}/
+cp -a views %{buildroot}%{app_root}/
+
+# ClearOS menu visibility needs htdocs to exist
+install -d %{buildroot}%{app_root}/htdocs
 
 install -d %{buildroot}/usr/share/licenses/%{name}
 install -m 0644 LICENSE %{buildroot}/usr/share/licenses/%{name}/LICENSE
@@ -52,8 +55,8 @@ install -m 0644 README.md %{buildroot}/usr/share/doc/%{name}/README.md
 %{app_root}/deploy
 %{app_root}/language
 %{app_root}/views
+%dir %{app_root}/htdocs
 
 %changelog
-
 * Thu Apr 16 2026 SnugLinux <snuglinux@ukr.net> - 0.0.1-1
 - Initial RPM package for ClearOS CPU Monitor
